@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dota 2 MMR Tracker Simulator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="code.js"></script>
+</head>
+<body>
+  <h1>Dota 2 MMR Tracker Simulator</h1>
+
+  <h3>Enter the MMR for your last 10 matches:</h3>
+
+  <div>
+    <label for="match1">Match 1:</label>
+    <input type="number" id="match1" min="0" required>
+  </div>
+  <div>
+    <label for="match2">Match 2:</label>
+    <input type="number" id="match2" min="0" required>
+  </div>
+  <div>
+    <label for="match3">Match 3:</label>
+    <input type="number" id="match3" min="0" required>
+  </div>
+  <div>
+    <label for="match4">Match 4:</label>
+    <input type="number" id="match4" min="0" required>
+  </div>
+  <div>
+    <label for="match5">Match 5:</label>
+    <input type="number" id="match5" min="0" required>
+  </div>
+  <div>
+    <label for="match6">Match 6:</label>
+    <input type="number" id="match6" min="0" required>
+  </div>
+  <div>
+    <label for="match7">Match 7:</label>
+    <input type="number" id="match7" min="0" required>
+  </div>
+  <div>
+    <label for="match8">Match 8:</label>
+    <input type="number" id="match8" min="0" required>
+  </div>
+  <div>
+    <label for="match9">Match 9:</label>
+    <input type="number" id="match9" min="0" required>
+  </div>
+  <div>
+    <label for="match10">Match 10:</label>
+    <input type="number" id="match10" min="0" required>
+  </div>
+
+  <button onclick="calculateAverage()">Calculate Average</button>
+
+  <div id="result"></div>
+</body>
+</html>
