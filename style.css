@@ -4,12 +4,15 @@ body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 20px;
+  display: flex; /* Use flexbox to arrange elements */
+  flex-wrap: wrap;
 }
 
 h1 {
   font-size: 28px;
   text-align: center;
   margin-bottom: 20px;
+  width: 100%; /* Full width for the h1 element */
 }
 
 h3 {
@@ -45,4 +48,29 @@ button:hover {
   font-size: 18px;
   font-weight: bold;
   margin-top: 20px;
+  width: 100%; /* Full width for the result element */
+}
+
+/* CSS for the table container */
+#tableContainer {
+  width: 50%; /* Set the width of the table container to 50% */
+  margin-left: auto; /* Push the table container to the right */
+  padding: 20px;
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+#mmrTable {
+  width: 100%; /* Full width for the table */
+  border-collapse: collapse;
+}
+
+#mmrTable th, #mmrTable td {
+  padding: 8px;
+  border: 1px solid #fff;
+  text-align: center;
+}
+
+#mmrTable th {
+  background-color: #ff6600;
+  color: #fff;
 }

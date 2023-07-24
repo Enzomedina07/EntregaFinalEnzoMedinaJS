@@ -29,7 +29,43 @@ function calculateAverage() {
   // Mostrar el promedio en el elemento "result"
   var resultElement = document.getElementById("result");
   resultElement.textContent = "Average MMR: " + averageMMR.toFixed(2);
+  saveMatchesToJSON();
 }
+
+function saveMatchesToJSON() {
+  var lastTenMatches = matches.slice(-10); // Get the last 10 matches
+  var json = JSON.stringify(lastTenMatches); // Convert to JSON string
+  localStorage.setItem("lastMatches", json); // Store in local storage with key "lastMatches"
+}
+
+function loadMatchesFromJSON() {
+  var json = localStorage.getItem("lastMatches"); // Get the JSON string from local storage
+  if (json) {
+    var lastTenMatches = JSON.parse(json); // Parse the JSON string back to JavaScript array
+    displayMatchesTable(lastTenMatches); // Display the matches in the table
+  } else {
+    alert("No saved matches found.");
+  }
+}
+
+function displayMatchesTable(matchesArray) {
+  var table = document.getElementById("mmrTable");
+  // Clear existing table rows except for the header row
+  while (table.rows.length > 1) {
+    table.deleteRow(1);
+  }
+
+  // Add the matches to the table
+  for (var i = 0; i < matchesArray.length; i++) {
+    var match = matchesArray[i];
+    var newRow = table.insertRow();
+    var matchNumberCell = newRow.insertCell(0);
+    var mmrCell = newRow.insertCell(1);
+    matchNumberCell.textContent = "Match " + match.matchNumber;
+    mmrCell.textContent = match.mmr;
+  }
+}
+
 
 // Función para buscar partidos por MMR
 function searchMatchesByMMR() {
@@ -42,13 +78,14 @@ function searchMatchesByMMR() {
   });
 
   // Mostrar los partidos encontrados o un mensaje si no se encontraron coincidencias
+  var resultElement = document.getElementById("result");
   if (filteredMatches.length > 0) {
     var matchNumbers = filteredMatches.map(function(match) {
       return "Match " + match.matchNumber;
     });
-    alert("Matches with MMR " + targetMMR + ": " + matchNumbers.join(", "));
+    resultElement.textContent = "Matches with MMR " + targetMMR + ": " + matchNumbers.join(", ");
   } else {
-    alert("No matches found with MMR " + targetMMR);
+    resultElement.textContent = "No matches found with MMR " + targetMMR;
   }
 }
 

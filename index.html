@@ -54,5 +54,14 @@
   <button onclick="searchMatchesByMMR()">Search Matches by MMR</button>
 
   <div id="result"></div>
+  <div id="tableContainer">
+    <table id="mmrTable">
+      <tr>
+        <th>Match Number</th>
+        <th>MMR</th>
+      </tr>
+    </table>
+    <button onclick="loadMatchesFromJSON()">Load Last 10 Matches</button>
+  </div>
 </body>
 </html>
