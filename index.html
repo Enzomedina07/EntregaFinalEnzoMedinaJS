@@ -54,6 +54,12 @@
   <button onclick="searchMatchesByMMR()">Search Matches by MMR</button>
 
   <div id="result"></div>
+  <div>
+    <label for="playerId">Enter Player's Dota ID:</label>
+    <input type="text" id="playerId" placeholder="Dota ID">
+    <button onclick="fetchPlayerData()">Get Player Data</button>
+  </div>
+  <div id="playerData"></div>
   <div id="tableContainer">
     <table id="mmrTable">
       <tr>
@@ -63,5 +69,5 @@
     </table>
     <button onclick="loadMatchesFromJSON()">Load Last 10 Matches</button>
   </div>
-</body>
-</html>
+  
+

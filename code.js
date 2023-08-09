@@ -33,16 +33,16 @@ function calculateAverage() {
 }
 
 function saveMatchesToJSON() {
-  var lastTenMatches = matches.slice(-10); // Get the last 10 matches
-  var json = JSON.stringify(lastTenMatches); // Convert to JSON string
-  localStorage.setItem("lastMatches", json); // Store in local storage with key "lastMatches"
+  var lastTenMatches = matches.slice(-10); // Traer los ultimos 10 matches
+  var json = JSON.stringify(lastTenMatches); // Convertir a Json
+  localStorage.setItem("lastMatches", json); // Guardar en el local "lastMatches"
 }
 
 function loadMatchesFromJSON() {
-  var json = localStorage.getItem("lastMatches"); // Get the JSON string from local storage
+  var json = localStorage.getItem("lastMatches"); // Pedir Json
   if (json) {
-    var lastTenMatches = JSON.parse(json); // Parse the JSON string back to JavaScript array
-    displayMatchesTable(lastTenMatches); // Display the matches in the table
+    var lastTenMatches = JSON.parse(json); // convertir el Json en array
+    displayMatchesTable(lastTenMatches); // Poner los matches en una tabla
   } else {
     alert("No saved matches found.");
   }
@@ -50,12 +50,12 @@ function loadMatchesFromJSON() {
 
 function displayMatchesTable(matchesArray) {
   var table = document.getElementById("mmrTable");
-  // Clear existing table rows except for the header row
+  // Limpiar los matches
   while (table.rows.length > 1) {
     table.deleteRow(1);
   }
 
-  // Add the matches to the table
+  // aniadir los matches a la tabla
   for (var i = 0; i < matchesArray.length; i++) {
     var match = matchesArray[i];
     var newRow = table.insertRow();
@@ -88,5 +88,39 @@ function searchMatchesByMMR() {
     resultElement.textContent = "No matches found with MMR " + targetMMR;
   }
 }
+//fetch para traer del html el input y pasarlo a la APi
+function fetchPlayerData() { 
+  const playerId = document.getElementById("playerId").value;
+  const apiUrl = `https://api.opendota.com/api/players/${playerId}`; 
 
-	
+  fetch(apiUrl) 
+    .then(response => response.json()) //la promesa
+    .then(playerData => {
+      displayPlayerData(playerData); //de json a constante
+    })
+    .catch(error => {
+      console.error('Error fetching player data:', error);
+    });
+}
+function displayPlayerData(playerData) { //funcion para mostrar el los datos de la Api
+  const playerDataDiv = document.getElementById("playerData");
+
+  if (playerData.profile) {
+    const personaname = playerData.profile.personaname;
+    const soloCompetitiveRank = playerData.solo_competitive_rank;
+    const mmrEstimate = playerData.mmr_estimate.estimate;
+    const avatarUrl = playerData.profile.avatarfull;
+
+    const playerInfo = `
+      <p>Personaname: ${personaname}</p>
+      <p>Solo Competitive Rank: ${soloCompetitiveRank}</p>
+      <p>MMR Estimate: ${mmrEstimate}</p>
+      <img src="${avatarUrl}" alt="Avatar">
+    `;
+
+    playerDataDiv.innerHTML = playerInfo;
+  } else {
+    playerDataDiv.innerHTML = "Player data not found."; //mensaje de error en caso de no encontrar Datos de la api en ese ID
+  }
+}
+
